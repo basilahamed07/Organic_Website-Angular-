@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
 
 @Component({
   selector: 'app-userlist',
@@ -8,9 +8,9 @@ import { GenericApiService } from '../../../services/apiservice/axiosservices.se
   styleUrls: ['./userlist.component.css']
 })
 export class UserlistComponent implements OnInit {
-  public data: any[] = []; // Array to hold the user data
+  public data: any[] = []; 
   access: string | null = sessionStorage.getItem("access");
-  searchQuery: string = ''; // Property to hold the search query
+  searchQuery: string = ''; 
 
   constructor(private apiService: GenericApiService, private router: Router) {}
 
@@ -24,7 +24,7 @@ export class UserlistComponent implements OnInit {
     this.apiService.get('admin/users/', { headers })
       .subscribe(
         (response: any) => {
-          this.data = response; // Store the fetched data
+          this.data = response; 
           console.log('Data fetched successfully', this.data);
         },
         error => {
@@ -41,7 +41,7 @@ export class UserlistComponent implements OnInit {
       this.apiService.delete(`admin/users/${id}/delete/`, { headers })
         .subscribe(
           () => {
-            this.data = this.data.filter(item => item.id !== id); // Remove deleted item from array
+            this.data = this.data.filter(item => item.id !== id);
             alert('User deleted successfully!');
           },
           error => {

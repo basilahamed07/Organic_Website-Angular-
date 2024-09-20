@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ChatbotComponent implements OnInit {
   userQuery: string = '';
-  userId: string = '';  // Will be set from session storage
+  userId: string = '';  
   messages: any[] = [];
   apiUrl = 'http://localhost:8000/api/chatbot/chatbot/';
   chatVisible: boolean = false;
@@ -59,18 +59,18 @@ export class ChatbotComponent implements OnInit {
     if (this.chatVisible) {
       this.initializeChat();
     } else {
-      this.messages = []; // Clear messages when chat is closed
+      this.messages = []; 
     }
   }
 
   initializeChat() {
-    // Add a default welcome message
+   
     this.messages.push({
       type: 'text',
       text: `Hello! ${this.email} How can I assist you today?`
     });
 
-    // Optionally add default product list, cart contents, or other info
+    
     this.messages.push({
       type: 'products',
     });
@@ -107,9 +107,6 @@ export class ChatbotComponent implements OnInit {
   }
 
   updateCartMessage() {
-    // Fetch cart items and update messages
-    // For demonstration purposes, we'll simulate it with some static data
-    // Example of static cart items
     const cartItems = [
       { id: 1, image: 'https://via.placeholder.com/80', name: 'Product 1', price: 29.99, quantity: 1 },
       { id: 2, image: 'https://via.placeholder.com/80', name: 'Product 2', price: 19.99, quantity: 2 }

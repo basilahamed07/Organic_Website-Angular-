@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
 import jsPDF from 'jspdf';
-import 'jspdf-autotable'; // Import jsPDF AutoTable
+import 'jspdf-autotable'; 
 
 @Component({
   selector: 'app-vieworders',
@@ -112,28 +112,28 @@ export class ViewordersComponent implements OnInit {
   generatePDF(order: any): void {
     const doc = new jsPDF();
 
-    // Add a title
+
     doc.setFontSize(22);
     doc.text('Order Invoice', 14, 20);
 
-    // Add order summary
+    
     doc.setFontSize(16);
     doc.text(`Order ID: ${order.shipping_id}`, 14, 30);
     doc.text(`Order Date: ${order.order_date}`, 14, 40);
     doc.text(`Total Price: ₹${order.total_price}`, 14, 50);
 
-    // Add product details
+ 
     doc.setFontSize(14);
     doc.text('Details:', 14, 70);
 
-    // Define table columns and rows (only Product Name column)
+
     const products = order.products.map((product: any) => [product.P_Name]);
 
-    // Add a table for product details
+  
     const columns = ['Details'];
     const rows = products;
 
-    // Using autoTable to create the table
+    
     (doc as any).autoTable({
       startY: 80,
       head: [columns],
@@ -143,10 +143,10 @@ export class ViewordersComponent implements OnInit {
       theme: 'striped'
     });
 
-    // Track the position of the last autoTable
+   
     const lastY = (doc as any).autoTable.previous.finalY;
 
-    // Add shipping details
+
     doc.setFontSize(14);
     doc.text('Shipping Details:', 14, lastY + 10);
 
@@ -157,11 +157,11 @@ export class ViewordersComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(shippingDetails, 14, lastY + 20);
 
-    // Add user address details
+ 
     doc.setFontSize(14);
     doc.text('User Address:', 14, lastY + 40);
 
-    // Ensure userAddress has correct data
+ 
     console.log('Generating PDF with Address:', this.userAddress);
 
     const addressDetails = this.userAddress
@@ -171,7 +171,7 @@ export class ViewordersComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(addressDetails, 14, lastY + 50);
 
-    // Convert PDF to Blob and upload
+
     const pdfBlob = doc.output('blob');
     this.uploadPDF(pdfBlob, order.shipping_id);
   }
@@ -193,7 +193,7 @@ export class ViewordersComponent implements OnInit {
   }
 
   private sendEmail(orderId: number): void {
-    // Retrieve the recipient email address from session storage
+    
     const recipientEmail = sessionStorage.getItem('email');
     
     if (!recipientEmail) {
@@ -201,13 +201,13 @@ export class ViewordersComponent implements OnInit {
       return;
     }
 
-    // Prepare the payload with the orderId and recipient email
+    
     const payload = {
       orderId: orderId,
       recipientEmail: recipientEmail
     };
 
-    // Send the POST request with the payload
+ 
     this.http.post('http://localhost:8000/api/email/send-email/', payload).subscribe(
       response => {
         console.log('Email sent successfully:', response);

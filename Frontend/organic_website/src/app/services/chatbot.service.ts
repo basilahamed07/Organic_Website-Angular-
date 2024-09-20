@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatbotService {
-  private apiUrl = 'http://localhost:8000/api/chatbotchat/'; // Update with your Django server URL
+  private apiUrl = 'http://localhost:8000/api/chatbotchat/';
 
   constructor(private http: HttpClient) { }
 

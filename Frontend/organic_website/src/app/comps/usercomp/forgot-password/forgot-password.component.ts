@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 export class ForgotPasswordComponent {
   recipientEmail: string = '';
 
-  private apiUrl = 'http://localhost:8000/api/email';  // Adjust the URL to match your Django backend
+  private apiUrl = 'http://localhost:8000/api/email'; 
 
   constructor(private http: HttpClient, private router: Router) {}
 
   sendOtp() {
-    // Store recipientEmail in sessionStorage
+    
     sessionStorage.setItem('recipientEmail', this.recipientEmail);
 
     this.http.post(`${this.apiUrl}/forgot-password`, { recipientEmail: this.recipientEmail })

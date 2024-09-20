@@ -12,7 +12,7 @@ export class FruitsComponent implements OnInit {
   cart_product_ids: any[] = [];
   quantities: any[] = [];
   showSuccessPopup: boolean = false;
-  existingCartIds: any[] = [];  // To store existing cart product IDs
+  existingCartIds: any[] = [];  
   existingQuandities:any[]=[];
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -23,11 +23,11 @@ export class FruitsComponent implements OnInit {
       'Authorization': `Bearer ${access}`
     });
 
-    // Fetching product data
+    
     this.http.get('http://127.0.0.1:8000/api/Product_Table/', { headers }).subscribe(
       (response: any) => {
         this.cardData = response;
-        // Initialize each product's quantity to 1
+        
         this.cardData.forEach(product => {
           product.quantity = 1;
         });
@@ -37,7 +37,7 @@ export class FruitsComponent implements OnInit {
       }
     );
 
-    // Fetching user cart data
+    
     this.http.get('http://localhost:8000/api/users/get_user', { headers }).subscribe(
       (response: any) => {
         this.existingCartIds = response.data.cart_product_ids;
@@ -45,7 +45,7 @@ export class FruitsComponent implements OnInit {
         this.existingQuandities = response.data.quantities;
         console.log("Existing cart product IDs:", this.existingCartIds);
 
-        // Initialize quantities to 1 for existing cart products
+    
         let i=0;
         this.existingCartIds.forEach(id => {
           if (!this.cart_product_ids.includes(id)) {
@@ -71,28 +71,28 @@ export class FruitsComponent implements OnInit {
     const productId = product.id;
     const productQuantity = product.quantity;
 
-    // Check if the product is already in the cart
+    
     const existingIndex = this.cart_product_ids.indexOf(productId);
 
     if (existingIndex === -1) {
-      // Product is not in the cart, add it with default quantity 1
+     
       this.cart_product_ids.push(productId);
-      this.quantities.push(productQuantity || 1); // Default quantity to 1 if not specified
+      this.quantities.push(productQuantity || 1); 
     } else {
-      // Product is already in the cart, update its quantity
+      
       this.quantities[existingIndex] = productQuantity;
     }
 
-    // Combine cart_product_ids with existingCartIds while avoiding duplicates
+    
     const allProductIds = new Set([...this.cart_product_ids, ...this.existingCartIds]);
 
-    // Convert the Set back to an array
+    
     const uniqueProductIds = Array.from(allProductIds);
 
-    // Prepare the payload
+ 
     const payload = {
       cart_product_ids: uniqueProductIds,
-      quantities: this.quantities.slice(0, uniqueProductIds.length) // Ensure quantities matches length of IDs
+      quantities: this.quantities.slice(0, uniqueProductIds.length) 
     };
 
     const access = sessionStorage.getItem("access");
@@ -100,7 +100,7 @@ export class FruitsComponent implements OnInit {
       'Authorization': `Bearer ${access}`
     });
 
-    // Posting data to Django API
+    
     console.log('Payload:', payload);
     this.http.patch('http://127.0.0.1:8000/api/users/get_user', payload, { headers })
       .subscribe(response => {
@@ -111,7 +111,7 @@ export class FruitsComponent implements OnInit {
       });
   }
 
-  // Close the popup
+  
   closePopup() {
     this.showSuccessPopup = false;
   }

@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 @Component({
   selector: 'app-feedbackform',
   templateUrl: './feedbackform.component.html',
-  styleUrls: ['./feedbackform.component.css'] // Corrected property name
+  styleUrls: ['./feedbackform.component.css'] 
 })
 export class FeedbackformComponent implements OnInit {
   feedbackForm: FormGroup;
@@ -34,7 +34,7 @@ export class FeedbackformComponent implements OnInit {
           catchError(error => {
             console.error('Error occurred:', error);
             alert('Failed to submit feedback. Please try again later.');
-            return of(null); // Return a fallback observable
+            return of(null);
           })
         )
         .subscribe(response => {

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
-import { MessageService } from 'primeng/api'; // Import MessageService
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
+import { MessageService } from 'primeng/api'; 
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-useradd',
   templateUrl: './useradd.component.html',
   styleUrls: ['./useradd.component.css'],
-  providers: [MessageService] // Add MessageService to providers
+  providers: [MessageService] 
 })
 export class UseraddComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class UseraddComponent implements OnInit {
     private apiService: GenericApiService,
     private router: Router,
     private cd: ChangeDetectorRef,
-    private messageService: MessageService // Inject MessageService
+    private messageService: MessageService 
   ) {}
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class UseraddComponent implements OnInit {
     this.cd.detectChanges(); 
   }
 
-  // Custom validator to check if password and confirm_password match
+  
   passwordMatchValidator(): ValidatorFn {
     return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
       const password = formGroup.get('password');
@@ -67,7 +67,7 @@ export class UseraddComponent implements OnInit {
       .subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User registered successfully!' });
-          this.router.navigate(['/admindash/userlist']); // Navigate to a different route if needed
+          this.router.navigate(['/admindash/userlist']); 
         },
         error => {
           console.error('Error registering user', error);

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
-import { MessageService } from 'primeng/api'; // Import MessageService
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service';
+import { MessageService } from 'primeng/api'; 
 
 @Component({
   selector: 'app-generatecop',
   templateUrl: './generatecop.component.html',
   styleUrls: ['./generatecop.component.css'],
-  providers: [MessageService] // Add MessageService to providers
+  providers: [MessageService] 
 })
 export class GeneratecopComponent implements OnInit {
   discountForm: any;
@@ -17,19 +17,19 @@ export class GeneratecopComponent implements OnInit {
   constructor(
     private apiService: GenericApiService,
     private router: Router,
-    private messageService: MessageService // Inject MessageService
+    private messageService: MessageService 
   ) {}
 
   ngOnInit(): void {
     this.access = sessionStorage.getItem("access");
     
-    // Initialize the form with a discount control and validation
+    
     this.discountForm = new FormGroup({
       discount: new FormControl('', [
         Validators.required, 
-        Validators.pattern('^[0-9]+$'), // Only numbers are allowed
-        Validators.min(0), // Minimum value is 0
-        Validators.max(100) // Maximum value is 100 (assuming percentage)
+        Validators.pattern('^[0-9]+$'), 
+        Validators.min(0),
+        Validators.max(100) 
       ])
     });
   }

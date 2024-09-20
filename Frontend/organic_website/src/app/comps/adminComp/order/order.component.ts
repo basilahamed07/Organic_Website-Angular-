@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
 
 @Component({
   selector: 'app-order',
@@ -8,13 +8,13 @@ import { GenericApiService } from '../../../services/apiservice/axiosservices.se
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  data: any[] = []; // Array to hold the fetched data
-  filteredData: any[] = []; // Array to hold the filtered data
-  currentPageData: any[] = []; // Array to hold the data for the current page
+  data: any[] = [];
+  filteredData: any[] = [];
+  currentPageData: any[] = []; 
   currentPage: number = 1;
   pageSize: number = 10;
   totalPages: number = 1;
-  searchTerm: string = ''; // Search term for filtering
+  searchTerm: string = '';
 
   constructor(private apiService: GenericApiService, private router: Router) {}
 
@@ -26,8 +26,8 @@ export class OrderComponent implements OnInit {
     this.apiService.get('orders/')
       .subscribe(
         (response: any) => {
-          this.data = response; // Store the fetched data
-          this.filteredData = [...this.data]; // Initialize filteredData
+          this.data = response;
+          this.filteredData = [...this.data];
           this.totalPages = Math.ceil(this.filteredData.length / this.pageSize);
           this.updatePageData();
         },
@@ -39,14 +39,14 @@ export class OrderComponent implements OnInit {
   }
 
   filterData() {
-    // Perform search filtering
+    
     this.filteredData = this.data.filter(item => 
       Object.values(item).some(value =>
         value!.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
       )
     );
     this.totalPages = Math.ceil(this.filteredData.length / this.pageSize);
-    this.currentPage = 1; // Reset to first page on search
+    this.currentPage = 1;
     this.updatePageData();
   }
 
@@ -75,8 +75,8 @@ export class OrderComponent implements OnInit {
       this.apiService.delete(`orders/${id}/`)
         .subscribe(
           () => {
-            this.data = this.data.filter(item => item.id !== id); // Remove deleted item from array
-            this.filterData(); // Apply search filter again after deletion
+            this.data = this.data.filter(item => item.id !== id); 
+            this.filterData(); 
             alert('Order deleted successfully!');
           },
           error => {

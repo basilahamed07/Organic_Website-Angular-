@@ -23,7 +23,7 @@
         'assets/image2.jpg',
         'assets/image3.jpg',
         'assets/image4.jpg'
-        // Add as many image URLs as needed
+        
       ];
 
     }

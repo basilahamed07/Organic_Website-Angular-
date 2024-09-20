@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GenericApiService {
-  private apiUrl = 'http://localhost:8000/api'; // Base URL for API
+  private apiUrl = 'http://localhost:8000/api';
   private access: string | null = sessionStorage.getItem("access");
 
   constructor(private http: HttpClient) { }
@@ -26,7 +26,7 @@ export class GenericApiService {
   get(endpoint: string, params?: any): Observable<any> {
     const headers = this.getHeaders();
     return this.http.get(`${this.apiUrl}/${endpoint}`, { headers, params }).pipe(
-      tap(response => console.log('API Response:', response)) // Debugging line
+      tap(response => console.log('API Response:', response))
     );
   }
 

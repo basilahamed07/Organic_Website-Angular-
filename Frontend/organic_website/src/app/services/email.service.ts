@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmailService {
-  private apiUrl = 'http://localhost:8000/api/email/send-email/'; // URL to your Django server
+  private apiUrl = 'http://localhost:8000/api/email/send-email/';
 
   constructor(private http: HttpClient) { }
 

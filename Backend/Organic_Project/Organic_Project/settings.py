@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "Feedback_table",
     "admin_table",
     "chatbot",
-    "invoice",
     "email_service",
     # app for the django table Stop
 

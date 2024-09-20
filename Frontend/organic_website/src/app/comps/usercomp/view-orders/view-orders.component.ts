@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -100,34 +100,32 @@ export class ViewOrdersComponent implements OnInit {
   generatePDF(order: any): void {
     const doc = new jsPDF();
 
-    // Add a title
+   
     doc.setFontSize(22);
     doc.text('Order Invoice', 14, 20);
 
-    // Add order summary
+   
     doc.setFontSize(16);
     doc.text(`Order ID: ${order.shipping_id}`, 14, 30);
     doc.text(`Order Date: ${order.order_date}`, 14, 40);
     doc.text(`Total Price: ₹${order.total_price}`, 14, 50);
 
-    // Add product details
+
     doc.setFontSize(14);
     doc.text('Products:', 14, 70);
 
-    // Define table columns and rows
+   
     const products = order.products.map((product: any, index: number) => [
       product.P_Name,
       `₹${product.P_Price}`,
       order.quantities[index]
     ]);
 
-    // Add a table for product details
-    // Add columns
+
     const columns = ['Product Name', 'Price', 'Quantity'];
-    // Add rows
+  
     const rows = products;
 
-    // Using autoTable to create the table
     (doc as any).autoTable({
       startY: 80,
       head: [columns],
@@ -137,10 +135,10 @@ export class ViewOrdersComponent implements OnInit {
       theme: 'striped'
     });
 
-    // Track the position of the last autoTable
+
     const lastY = (doc as any).autoTable.previous.finalY;
 
-    // Add shipping details
+   
     doc.setFontSize(14);
     doc.text('Shipping Details:', 14, lastY + 10);
 
@@ -151,7 +149,7 @@ export class ViewOrdersComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(shippingDetails, 14, lastY + 20);
 
-    // Add user address details
+ 
     doc.setFontSize(14);
     doc.text('User Address:', 14, lastY + 40);
     
@@ -162,29 +160,10 @@ export class ViewOrdersComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(addressDetails, 14, lastY + 50);
 
-    // Save the PDF
+ 
     doc.save(`order_${order.shipping_id}.pdf`);
   }
 
-  // downloadInvoice(orderId: number): void {
-  //   const headers = {
-  //     'Authorization': `Bearer ${this.access}`,
-  //     'Accept': 'application/vnd.oasis.opendocument.text' // This header can be adjusted based on the API's requirements
-  //   };
 
-  //   this.apiService.get(`invoice/api/invoices/${orderId}/`, { headers, responseType: 'blob' }).subscribe(
-  //     (response: Blob) => {
-  //       const blob = new Blob([response], { type: 'application/vnd.oasis.opendocument.text' });
-  //       const url = window.URL.createObjectURL(blob);
-  //       const a = document.createElement('a');
-  //       a.href = url;
-  //       a.download = `invoice_${orderId}.odt`; // Adjust the filename as needed
-  //       a.click();
-  //       window.URL.revokeObjectURL(url);
-  //     },
-  //     error => {
-  //       console.error('Error when downloading invoice:', error);
-  //     }
-  //   );
   }
 

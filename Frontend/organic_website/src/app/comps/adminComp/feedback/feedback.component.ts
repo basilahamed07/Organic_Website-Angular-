@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
 
 @Component({
   selector: 'app-feedback',
@@ -8,11 +8,11 @@ import { GenericApiService } from '../../../services/apiservice/axiosservices.se
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
-  feedbackData: any[] = []; // Array to hold the fetched feedback data
-  displayedFeedback: any[] = []; // Array to hold feedback data for the current page
+  feedbackData: any[] = [];
+  displayedFeedback: any[] = []; 
   currentPage: number = 1;
   pageSize: number = 8;
-  searchTerm: string = ''; // Search term for filtering
+  searchTerm: string = ''; 
 
   constructor(private apiService: GenericApiService, private route: Router) {}
 
@@ -24,9 +24,9 @@ export class FeedbackComponent implements OnInit {
     this.apiService.get('feedback/')
       .subscribe(
         (response: any) => {
-          this.feedbackData = response; // Store the fetched data
-          this.filterFeedback(); // Initialize filtered data
-          this.updatePageData(); // Update pagination with initial data
+          this.feedbackData = response; 
+          this.filterFeedback(); 
+          this.updatePageData(); 
         },
         error => {
           console.error('Error fetching data', error);
@@ -36,8 +36,8 @@ export class FeedbackComponent implements OnInit {
   }
 
   searchFeedback() {
-    this.filterFeedback(); // Apply filtering
-    // Automatically go to the next page if needed
+    this.filterFeedback(); 
+    
     if (this.currentPage > this.totalPages) {
       this.currentPage = this.totalPages;
     } else {
@@ -54,7 +54,7 @@ export class FeedbackComponent implements OnInit {
         item.email.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
-    this.currentPage = 1; // Reset to first page on search
+    this.currentPage = 1; 
     this.updatePageData();
   }
 
@@ -76,10 +76,10 @@ export class FeedbackComponent implements OnInit {
       this.apiService.delete(`feedback/${feedbackId}`)
         .subscribe(
           () => {
-            // Filter out the deleted feedback
+            
             this.feedbackData = this.feedbackData.filter(item => item.id !== feedbackId);
-            this.filterFeedback(); // Reapply the filtering to reflect changes
-            this.updatePageData(); // Update displayed data after deletion
+            this.filterFeedback(); 
+            this.updatePageData(); 
           },
           error => {
             console.error('Error deleting feedback', error);

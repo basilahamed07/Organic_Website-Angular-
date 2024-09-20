@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
-import { MessageService } from 'primeng/api'; // Import MessageService
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
+import { MessageService } from 'primeng/api'; 
 
 @Component({
   selector: 'app-prodactedit',
   templateUrl: './prodactedit.component.html',
   styleUrls: ['./prodactedit.component.css'],
-  providers: [MessageService] // Add MessageService to providers
+  providers: [MessageService] 
 })
 export class ProdacteditComponent implements OnInit {
   prodact: any = {
@@ -29,7 +29,7 @@ export class ProdacteditComponent implements OnInit {
     private apiService: GenericApiService,
     private router: Router,
     private route: ActivatedRoute,
-    private messageService: MessageService // Inject MessageService
+    private messageService: MessageService 
   ) {
     // Initialize form group
     this.userForm = new FormGroup({
@@ -50,7 +50,7 @@ export class ProdacteditComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.prodact = res;
-          this.userForm.patchValue(this.prodact); // Set form values with product data
+          this.userForm.patchValue(this.prodact); 
         },
         error => {
           console.error('Error fetching product data', error);
@@ -83,7 +83,7 @@ export class ProdacteditComponent implements OnInit {
       .subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product updated successfully.' });
-          setTimeout(() => this.router.navigate(['/admindash']), 1500); // Delay navigation to allow toast to display
+          setTimeout(() => this.router.navigate(['/admindash']), 1500);
         },
         error => {
           console.error('Error updating product', error);

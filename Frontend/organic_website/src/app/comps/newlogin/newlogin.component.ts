@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar for better notifications
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 
 @Component({
   selector: 'app-newlogin',
@@ -20,14 +20,14 @@ export class NewloginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
-    private snackBar: MatSnackBar // Inject MatSnackBar
+    private snackBar: MatSnackBar 
   ) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirm_password: ['', [Validators.required]],
-      first_name: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+$')]], // Added validation
-      last_name: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+$')]],  // Added validation
+      first_name: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+$')]], 
+      last_name: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+$')]],  
       phone_number: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     }, { validators: this.passwordMatchValidator });
 
@@ -39,18 +39,18 @@ export class NewloginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Toggle between sign-up and login forms
+
   toggleForm(): void {
     this.isSignUp = !this.isSignUp;
     this.container.nativeElement.classList.toggle('right-panel-active');
   }
 
-  // For sign-in form
+
   signIn(): void {
     this.container.nativeElement.classList.remove('right-panel-active');
   }
 
-  // For sign-up form
+ 
   signUp(): void {
     this.container.nativeElement.classList.add('right-panel-active');
   }
@@ -80,8 +80,8 @@ export class NewloginComponent implements OnInit {
       const response: any = await this.http.post('http://localhost:8000/api/users/register', signupData).toPromise();
       console.log('Signup successful:', response);
       sessionStorage.setItem('access', response.access);
-      sessionStorage.setItem('user_id', response.user_id); // Ensure your API returns user_id
-      this.router.navigate(['/signin']); // Redirect to home page or login page based on your requirement
+      sessionStorage.setItem('user_id', response.user_id);
+      this.router.navigate(['/signin']); 
     } catch (error: any) {
       console.error('Signup failed:', error);
       this.snackBar.open('Signup failed: ' + error.error.message, 'Close', { duration: 5000 });

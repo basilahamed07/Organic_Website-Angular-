@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
-import { MessageService } from 'primeng/api'; // Import MessageService
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service';
+import { MessageService } from 'primeng/api'; 
 
 @Component({
   selector: 'app-prodactadd',
   templateUrl: './prodactadd.component.html',
   styleUrls: ['./prodactadd.component.css'],
-  providers: [MessageService] // Provide MessageService here
+  providers: [MessageService] 
 })
 export class ProdactaddComponent implements OnInit {
   userForm: any;
@@ -18,7 +18,7 @@ export class ProdactaddComponent implements OnInit {
   constructor(
     private apiService: GenericApiService,
     private route: Router,
-    private messageService: MessageService // Inject MessageService
+    private messageService: MessageService 
   ) {}
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class ProdactaddComponent implements OnInit {
       () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully!' });
         this.userForm.reset();
-        this.file = null; // Clear the file input after successful submission
+        this.file = null; 
       },
       error => {
         console.error('Error adding product', error);

@@ -20,7 +20,7 @@ export class EmailTestComponent {
       response => {
         this.successMessage = 'Email sent successfully!';
         this.errorMessage = null;
-        // Clear form fields
+    
         this.toEmail = '';
         this.subject = '';
         this.message = '';

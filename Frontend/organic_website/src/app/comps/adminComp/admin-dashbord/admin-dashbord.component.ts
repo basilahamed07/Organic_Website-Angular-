@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrl: './admin-dashbord.component.css'
 })
 export class AdminDashbordComponent implements OnInit {
-  data: any; // Define the type according to your data structure
+  data: any; 
   isLoading = true;
   hasError = false;
 
@@ -18,7 +18,7 @@ export class AdminDashbordComponent implements OnInit {
   }
 
   fetchData(): void {
-    this.apiService.get('Product_Table/') // Adjust endpoint as needed
+    this.apiService.get('Product_Table/') 
       .subscribe(
         (response) => {
           this.data = response;

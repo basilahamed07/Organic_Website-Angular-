@@ -11,8 +11,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
  
-# Create your views here.
-# @extend_schema(auth=[])
+
 class RegisterUserAPIView(APIView):
     """Create User for authentication."""
     permission_classes = [permissions.AllowAny]

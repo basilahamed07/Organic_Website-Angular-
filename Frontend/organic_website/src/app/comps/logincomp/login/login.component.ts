@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import Reactive Forms modules
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   
   
   {
-    // Initialize Forms
+    
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       phone_number: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-    }, { validators: this.passwordMatchValidator }); // Custom Validator
+    }, { validators: this.passwordMatchValidator });
 
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
   onSignUp(): void {
     if (this.signupForm.invalid) {
-      this.signupForm.markAllAsTouched(); // Show validation errors
+      this.signupForm.markAllAsTouched();
       return;
     }
 
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched(); // Show validation errors
+      this.loginForm.markAllAsTouched(); 
       return;
     }
 

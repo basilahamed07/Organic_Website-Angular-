@@ -18,11 +18,11 @@ export class ApexchartComponent implements OnInit, AfterViewInit {
   constructor(private apiService: GenericApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.chartdata(); // Initialize chart options
+    this.chartdata(); 
   }
 
   ngAfterViewInit() {
-    this.fetchData(); // Fetch data and update chart
+    this.fetchData(); 
     this.usercount();
     this.orderscount();
     this.shippingcount();
@@ -53,7 +53,7 @@ export class ApexchartComponent implements OnInit, AfterViewInit {
         },
         labels: {
           formatter: function (val) {
-            return val / 1000 + 'K'; // Use 'K' for thousands if necessary
+            return val / 1000 + 'K'; 
           }
         }
       },
@@ -93,7 +93,7 @@ export class ApexchartComponent implements OnInit, AfterViewInit {
         name: 'Total Price',
         data: dataPoints
       }];
-      this.cdr.detectChanges(); // Trigger change detection
+      this.cdr.detectChanges(); 
     }
   }
 

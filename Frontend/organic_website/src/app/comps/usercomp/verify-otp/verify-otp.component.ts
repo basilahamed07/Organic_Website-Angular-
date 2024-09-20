@@ -5,14 +5,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-verify-otp',
   templateUrl: './verify-otp.component.html',
-  styleUrls: ['./verify-otp.component.css']  // Changed from styleUrl to styleUrls
+  styleUrls: ['./verify-otp.component.css']  
 })
 export class VerifyOtpComponent {
 
   otp: string = '';
-  recipientEmail: string | null = '';  // Initialize recipientEmail
+  recipientEmail: string | null = '';  
 
-  private apiUrl = 'http://localhost:8000/api/email';  // Adjust the URL to match your Django backend
+  private apiUrl = 'http://localhost:8000/api/email';  
 
   constructor(private http: HttpClient, private router: Router) {
     

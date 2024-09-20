@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
 
 @Component({
   selector: 'app-chat',
@@ -24,7 +24,7 @@ export class ChatComponent {
       },
       error => {
         console.error('Error sending message:', error);
-        // Optionally handle the error, e.g., show a message to the user
+        
       }
     );
   }

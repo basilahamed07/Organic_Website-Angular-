@@ -9,10 +9,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SetPasswordComponent {
   newPassword: string = '';
-  confirmPassword: string = ''; // Correct field name
+  confirmPassword: string = ''; 
   recipientEmail: string | null = '';
 
-  private apiUrl = 'http://localhost:8000/api/users/update_password';  // Adjust the URL to match your Django backend
+  private apiUrl = 'http://localhost:8000/api/users/update_password';  
 
   constructor(private http: HttpClient, private router: Router) {}
 

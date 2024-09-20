@@ -2,7 +2,7 @@
   import { Router } from '@angular/router';
   import { Observable, forkJoin } from 'rxjs';
   import * as L from 'leaflet';
-  import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+  import { GenericApiService } from '../../../services/apiservice/axiosservices.service';
 
   @Component({
     selector: 'app-view-cart',
@@ -38,43 +38,43 @@
     }
 
     ngAfterViewInit(): void {
-      this.initMap();  // Initialize the map first
+      this.initMap();
     }
 
     private initMap(): void {
-      // Initialize the map
+ 
       this.map = L.map('map', {
-        center: [13.0843, 80.2705],  // Default center location
+        center: [13.0843, 80.2705],  
         zoom: 13,
         dragging: true,
       });
 
-      // Add OpenStreetMap tile layer
+    
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
 
-      // Initialize a draggable marker and add it to the map
+      
       const marker = L.marker([13.0843, 80.2705], { draggable: true })
         .addTo(this.map)
         .bindPopup('Your location')
         .openPopup();
 
-      // Listen for the dragend event to get the new marker position
+      
       marker.on('dragend', () => {
         const position = marker.getLatLng();
         marker.setLatLng(position).bindPopup('Moved to: ' + position.toString()).openPopup();
       });
 
-      // Define a custom control to disable dragging of the map
+      
       const ToggleDragControl = L.Control.extend({
         onAdd: () => {
           const button = L.DomUtil.create('button', 'toggle-drag');
-          button.innerHTML = 'Disable Map Dragging'; // Default text
+          button.innerHTML = 'Disable Map Dragging'; 
           button.style.backgroundColor = 'white';
           button.style.padding = '5px';
 
-          // Toggle dragging when button is clicked
+          
           button.onclick = () => {
             if (this.map.dragging.enabled()) {
               this.map.dragging.disable();
@@ -88,14 +88,14 @@
           return button;
         },
         onRemove: () => {
-          // Nothing to do here
+          
         }
       });
 
-      // Add the custom control to the map (top right position)
+     
       new ToggleDragControl({ position: 'topright' }).addTo(this.map);
 
-      // After initializing the map, attempt to get the user's location
+    
       this.getUserLocation();
     }
 
@@ -106,16 +106,16 @@
             this.lat = position.coords.latitude;
             this.lng = position.coords.longitude;
 
-            // Center map to user's location
+        
             this.map.setView([this.lat, this.lng], 13);
 
-            // Add a draggable marker to user's location
+           
             const marker = L.marker([this.lat, this.lng], { draggable: true })
               .addTo(this.map)
               .bindPopup('You are here')
               .openPopup();
 
-            // Listen for dragend event to get new marker position
+          
             marker.on('dragend', () => {
               const position = marker.getLatLng();
               marker.setLatLng(position).bindPopup('Moved to: ' + position.toString()).openPopup();
@@ -138,10 +138,10 @@
             const coupon = coupons.find(c => c.code === this.couponCode);
             if (coupon) {
               this.discount = coupon.discount;
-              this.calculateTotalPrice();  // Recalculate the total price with the discount
+              this.calculateTotalPrice();  
               alert(`Coupon applied! ${this.discount}% discount.`);
               
-              // Optional: Confirm deletion of the coupon if this is intended
+             
               if (confirm('Do you want to use this coupon code it is one time only?')) {
                 this.apiService.delete(`coupon/${coupon.id}`).subscribe(
                   () => console.log('Coupon deleted successfully'),
@@ -242,7 +242,7 @@
         return total + (this.quantities[index] * product.P_Price);
       }, 0);
 
-      this.totalPrice = subtotal - (subtotal * this.discount / 100); // Apply discount
+      this.totalPrice = subtotal - (subtotal * this.discount / 100);
     }
 
     deleteProduct(index: number): void {
@@ -310,7 +310,7 @@
       }
     }
     
-    // Method to check if address is valid
+   
     private isAddressValid(): boolean {
       return this.address.first_line.trim() !== '' && 
              this.address.city.trim() !== '' && 

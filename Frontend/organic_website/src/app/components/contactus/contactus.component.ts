@@ -28,12 +28,12 @@ export class ContactusComponent  {
       'Authorization': `Bearer ${access}`
     });this.http.post('http://localhost:8000/api/feedback/', formData).subscribe(
       response => {
-        // Handle success (show success message, clear form, etc.)
+       
         window.alert('Message sent successfully!');
         this.contactForm.reset();
       },
       error => {
-        // Handle error (show error message)
+      
         window.alert('Error occured');
         console.error('Error sending message:', error);
       }

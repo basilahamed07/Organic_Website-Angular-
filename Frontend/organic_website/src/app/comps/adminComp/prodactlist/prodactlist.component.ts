@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { GenericApiService } from './generic-api.service'; // Adjust the path as necessary
+
 import { GenericApiService } from '../../../services/apiservice/axiosservices.service';
 @Component({
   selector: 'app-prodactlist',
@@ -8,9 +8,9 @@ import { GenericApiService } from '../../../services/apiservice/axiosservices.se
   styleUrls: ['./prodactlist.component.css']
 })
 export class ProdactlistComponent implements OnInit {
-  data: any[] = []; // Array to hold the product data
-  filteredData: any[] = []; // Array to hold the filtered data
-  searchTerm: string = ''; // Search term for filtering
+  data: any[] = []; 
+  filteredData: any[] = []; 
+  searchTerm: string = ''; 
   currentPage: number = 1;
   pageSize: number = 4;
   access: string | null = sessionStorage.getItem("access");
@@ -35,9 +35,9 @@ export class ProdactlistComponent implements OnInit {
     this.apiService.get('Product_Table/')
       .subscribe(
         (response: any) => {
-          this.data = response; // Store the fetched data
-          this.filteredData = this.data; // Initialize filtered data
-          this.filterProducts(); // Re-filter the data to apply initial filters
+          this.data = response; 
+          this.filteredData = this.data; 
+          this.filterProducts();
           console.log('Data fetched successfully', this.data);
         },
         error => {
@@ -55,7 +55,7 @@ export class ProdactlistComponent implements OnInit {
         product.P_Name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
-    this.currentPage = 1; // Reset to the first page when filtering
+    this.currentPage = 1; 
   }
 
   deleteDataprodact(id: number) {
@@ -63,8 +63,8 @@ export class ProdactlistComponent implements OnInit {
       this.apiService.delete(`Product_Table/${id}`)
         .subscribe(
           () => {
-            this.data = this.data.filter(item => item.id !== id); // Remove deleted item from array
-            this.filterProducts(); // Re-filter the data
+            this.data = this.data.filter(item => item.id !== id); 
+            this.filterProducts(); 
             alert('Product deleted successfully!');
           },
           error => {

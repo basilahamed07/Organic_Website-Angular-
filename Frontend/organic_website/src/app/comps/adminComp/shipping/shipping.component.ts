@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; // Adjust the path as necessary
+import { GenericApiService } from '../../../services/apiservice/axiosservices.service'; 
 
 @Component({
   selector: 'app-shipping',
@@ -8,12 +8,12 @@ import { GenericApiService } from '../../../services/apiservice/axiosservices.se
   styleUrls: ['./shipping.component.css']
 })
 export class ShippingComponent implements OnInit {
-  data: any[] = []; // Array to hold the fetched data
-  filteredData: any[] = []; // Array to hold the filtered data
-  displayedData: any[] = []; // Array to hold data for the current page
+  data: any[] = []; 
+  filteredData: any[] = []; 
+  displayedData: any[] = []; 
   currentPage: number = 1;
   pageSize: number = 5;
-  searchTerm: string = ''; // Search term for filtering
+  searchTerm: string = ''; 
 
   constructor(private apiService: GenericApiService, private route: Router) {}
 
@@ -27,11 +27,11 @@ export class ShippingComponent implements OnInit {
         (response: any[]) => {
           this.data = response.map(item => ({
             ...item,
-            created_at: new Date(item.created_at), // Ensure the date is a JavaScript Date object
-            shipping_status: this.calculateStatus(item) // Update the status based on date
+            created_at: new Date(item.created_at), 
+            shipping_status: this.calculateStatus(item)
           }));
-          this.filterData(); // Initialize filtered data
-          this.updatePageData(); // Update pagination with initial data
+          this.filterData(); 
+          this.updatePageData(); 
         },
         error => {
           console.error('Error fetching data', error);
@@ -53,7 +53,7 @@ export class ShippingComponent implements OnInit {
   }
 
   searchByTrackingId() {
-    this.filterData(); // Apply filtering
+    this.filterData(); 
     if (this.currentPage > this.totalPages) {
       this.currentPage = this.totalPages;
     } else {
@@ -65,7 +65,7 @@ export class ShippingComponent implements OnInit {
     if (this.searchTerm.trim() === '') {
       this.filteredData = this.data.map(item => ({
         ...item,
-        shipping_status: this.calculateStatus(item) // Recalculate status for all items
+        shipping_status: this.calculateStatus(item) 
       }));
     } else {
       this.filteredData = this.data
@@ -74,10 +74,10 @@ export class ShippingComponent implements OnInit {
         )
         .map(item => ({
           ...item,
-          shipping_status: this.calculateStatus(item) // Recalculate status for filtered items
+          shipping_status: this.calculateStatus(item) 
         }));
     }
-    this.currentPage = 1; // Reset to first page on search
+    this.currentPage = 1; 
     this.updatePageData();
   }
 
